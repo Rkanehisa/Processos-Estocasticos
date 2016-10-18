@@ -1,8 +1,3 @@
-from numpy import linalg as LA
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.ticker import FuncFormatter
-
 #Uso do arquivo de input:
 # Escreva APENAS os números
 # Na primeira linha digite o número de iterações ex: 5
@@ -12,6 +7,11 @@ from matplotlib.ticker import FuncFormatter
 # 0.9 0.1; 0.5 0.5 representa a matriz:
 # [0.9 0.1]
 # [0.5 0.5]
+
+#from numpy import linalg as LA
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
 
 t = int(input())
 initVector = np.matrix(input())
@@ -29,14 +29,15 @@ ind = np.arange(len(L))
 
 ax.set_title('Trabalho de PE')
 ax.set_ylabel('Probabilidade')
-ax.set_xlabel('Elemento')
+ax.set_xlabel('Estado')
 rects = ax.bar(ind,L,width,align="center")
-
 
 ax.yaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y)))
 ax.set_xticks(ind)
 for i in range(len(L)):
-	L[i] = ('%.2f' % L[i])
+	# L[i] = ('%.2f' % L[i])
+	# Changed to i, so now Row shows State number
+	L[i] = i
 ax.set_xticklabels (L)
 plt.xlim([-1,len(L)])
 plt.ylim([0,1.1])
