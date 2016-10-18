@@ -1,6 +1,8 @@
 from numpy import linalg as LA
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter
+
 #Uso do arquivo de input:
 # Escreva APENAS os números
 # Na primeira linha digite o número de iterações ex: 5
@@ -19,6 +21,32 @@ result = initVector*(A**t)
 _, cols = result.shape
 L = [float(result[:,i]) for i in range(cols)]
 print(L)
-explode = (0.1, 0, 0, 0)
-plt.pie(L,autopct='%1.2f%%', shadow=True, startangle=140)
+
+#Gráfico de Barras
+fig, ax = plt.subplots()
+width = 0.5
+ind = np.arange(len(L))
+
+ax.set_title('Trabalho de PE')
+ax.set_ylabel('Probabilidade')
+ax.set_xlabel('Elemento')
+rects = ax.bar(ind,L,width,align="center")
+
+
+ax.yaxis.set_major_formatter(FuncFormatter(lambda y, _: '{:.0%}'.format(y)))
+ax.set_xticks(ind)
+for i in range(len(L)):
+	L[i] = ('%.2f' % L[i])
+ax.set_xticklabels (L)
+plt.xlim([-1,len(L)])
+plt.ylim([0,1.1])
+def autolabel(rects):
+    for rect in rects:
+        height = rect.get_height()
+        
+        ax.text(rect.get_x() + rect.get_width()/2, 1.05*height,'%1.2f%s' % (float(height*100),'%'),ha='center', va='bottom',fontsize=18)
+autolabel(rects)
+
+#Gráfico de Pizza
+#plt.bar(L,autopct='%1.2f%%', shadow=True, startangle=140)
 plt.show()
