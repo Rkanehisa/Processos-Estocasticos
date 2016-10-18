@@ -20,7 +20,6 @@ result = initVector*(A**t)
 
 _, cols = result.shape
 L = [float(result[:,i]) for i in range(cols)]
-print(L)
 
 #Gráfico de Barras
 fig, ax = plt.subplots()
